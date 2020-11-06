@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LIVE CLOCK</title>
+	<style>
+		body{
+			background-color: skyblue;
+		}
+.clock{
+   height: 30px;
+   width: 30px;
+   position: relative;
+   left: 450px;
+   bottom: -100px;
+		}
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 0;
+  left: -45px;
+  right: 0;
+  bottom: 20px;
+  margin: auto;
+  position: absolute;
+  box-shadow: 0 2px 4px -1px red;
+}
+
+.hour-hand {
+  position: absolute;
+  width: 4px;
+  height: 65px;
+  background: brown;
+  top: 235px;
+  transform-origin: 50% 72px;
+  left: 655px;
+  }
+
+.minute-hand {
+  position: absolute;
+  width: 4px;
+  height: 100px;
+  background: black;
+  top: 200px;
+  left: 655px;
+  transform-origin: 50% 105px;
+}
+
+
+.second-hand {
+  position: absolute;
+  width: 3px;
+  height: 120px;
+  background:red;
+  top: 180px;
+  lefT: 48%;
+  transform-origin: 50% 125px;
+}
+
+</style>
+</head>
+<body>
+<div class="clock">
+	<img src="D:\Datas\Desktop\Coding town\Project\clock.png" alt=""></div>
+  <div>
+    <div class="hour-hand" id="hour"></div>
+    <div class="minute-hand" id="minute"></div>
+    <div class="second-hand" id="second"></div>
+  </div>
+  <div class="dot"></div>
+  <</body>
+<script>
+	var date = new Date();
+	var hour = date.getHours()%12,minute=date.getMinutes(),second=date.getSeconds();
+	var hourDeg = hour*30,
+	    minuteDeg = minute*6,
+	    secondDeg =second*6;
+	    hourDeg+=((minuteDeg/72)*6); 
+   
+		setInterval(
+			function()
+		{
+ 		second++;
+  		secondDeg+=6;
+  		document.getElementById("second").setAttribute("style", "transform: rotate("+secondDeg+"deg)");
+        document.getElementById("minute").setAttribute("style", "transform: rotate("+minuteDeg+"deg)");
+    	document.getElementById("hour").setAttribute("style", "transform: rotate("+hourDeg+"deg)");
+  				
+  				if(second == 60)
+  					{
+  					second = 0;
+    				minute++;
+    				minuteDeg+=6;
+      			//	document.getElementById("minute").setAttribute("style", "transform: rotate("+minuteDeg+"deg)");
+                		
+                		if(minuteDeg%72==0)
+                		{
+                		hourDeg+=6;
+                //		document.getElementById("hour").setAttribute("style", "transform: rotate("+hourDeg+"deg)");
+                		}
+    
+    							if(minute==60)
+    							{
+								minute = 0;
+    							minuteDeg=0;
+    							hour++;
+   
+    								if(hour == 13)
+    								{
+        							hour = 1;
+        							}
+    							}
+					}
+		},1000);
+</script>
+</html>
+	
